@@ -2,15 +2,14 @@ import streamlit as st
 import numpy as np
 import pickle
 from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-#from tensorflow.keras.models import load_model
-#from tensorflow.keras.utils import pad_sequences
-#Load the LSTM Model
-model=load_model('next_word_lstm1.h5')
+from tensorflow.keras.utils import pad_sequences  # Updated import
 
-#3 Laod the tokenizer
-with open('tokenizer.pickle','rb') as handle:
-    tokenizer=pickle.load(handle)
+# Load the LSTM Model
+model = load_model('next_word_lstm1.h5')
+
+# Load the tokenizer
+with open('tokenizer.pickle', 'rb') as handle:
+    tokenizer = pickle.load(handle)
 
 # Function to predict the next word
 def predict_next_word(model, tokenizer, text, max_sequence_len):
@@ -25,11 +24,10 @@ def predict_next_word(model, tokenizer, text, max_sequence_len):
             return word
     return None
 
-# streamlit app
+# Streamlit app
 st.title("Next Word Prediction With LSTM And Early Stopping")
-input_text=st.text_input("Enter the sequence of Words","To be or not to")
+input_text = st.text_input("Enter the sequence of Words", "To be or not to")
 if st.button("Predict Next Word"):
     max_sequence_len = model.input_shape[1] + 1  # Retrieve the max sequence length from the model input shape
     next_word = predict_next_word(model, tokenizer, input_text, max_sequence_len)
     st.write(f'Next word: {next_word}')
-
