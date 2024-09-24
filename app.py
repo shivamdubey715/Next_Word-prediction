@@ -1,9 +1,10 @@
 import streamlit as st
 import numpy as np
 import pickle
+#from tensorflow.keras.models import load_model
+#from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-
+from tensorflow.keras.utils import pad_sequences
 #Load the LSTM Model
 model=load_model('next_word_lstm1.h5')
 
